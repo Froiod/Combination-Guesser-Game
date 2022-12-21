@@ -14,7 +14,7 @@ button.addEventListener('click', () => {
 
 // creating elements
 function maker() {
-  for (x = 0; x < 4; x++) {
+  for (x = 0; x < 5; x++) {
     let el = document.createElement("input")
     el.setAttribute('type', 'number')
     el.max = 9
@@ -22,7 +22,9 @@ function maker() {
     el.size = 1
     el.style.width = "50px"
     el.classList.add('numb')
-    el.value = 0
+    
+    el.correct = Math.floor(Math.random() *10)
+    el.value = el.correct
     el.order = x
     gameArea.appendChild(el)
     console.log(el)
