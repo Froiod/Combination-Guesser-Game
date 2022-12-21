@@ -9,6 +9,17 @@ button.addEventListener('click', () => {
     button.innerHTML = "Check Combo"
   } else {
     console.log("checker")
+    const numbers = document.querySelectorAll('.numb')
+    console.log(numbers)
+    for (let i = 0; i < numbers.length; i++ ) {
+      console.log(numbers[i].value)
+      console.log(numbers[i].correct)
+      if (numbers[i].value == numbers[i].correct) {
+        console.log('Match')
+      } else {
+        console.log('No Match')
+      }
+    }
   }
 })
 
@@ -20,7 +31,9 @@ function maker() {
     el.max = 9
     el.min = 0
     el.size = 1
-    el.style.width = "50px"
+    el.style.width = "12vw"
+    el.style.margin = "1rem"
+    el.style.textAlign = "center"
     el.classList.add('numb')
     
     el.correct = Math.floor(Math.random() *10)
