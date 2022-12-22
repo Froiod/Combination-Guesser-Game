@@ -1,27 +1,49 @@
 const gameArea = document.querySelector('.game')
 const button = document.querySelector('button')
+const message = document.querySelector('.message')
 let gamePlay = false
-
+let score = 0
 button.addEventListener('click', () => {
   if (!gamePlay) {
     gamePlay = true
+    gameArea.innerHTML = ""
+    score = 0;
     maker()
+    message.innerHTML = "Guess the combo";
     button.innerHTML = "Check Combo"
   } else {
     console.log("checker")
+    score++;
     const numbers = document.querySelectorAll('.numb')
-    console.log(numbers)
+    let winCondition = 0;
     for (let i = 0; i < numbers.length; i++ ) {
-      console.log(numbers[i].value)
-      console.log(numbers[i].correct)
+      
       if (numbers[i].value == numbers[i].correct) {
-        console.log('Match')
-      } else {
-        console.log('No Match')
+        numbers[i].style.backgroundColor = "green"
+        numbers[i].style.color = "white"
+        winCondition++;
+
+      } 
+      else {
+        let color = (numbers[i].value < numbers[i].correct) ? "blue" : "red";
+        numbers[i].style.backgroundColor = color;
+        numbers[i].style.color = "black";
       }
+      if (winCondition == numbers.length) {
+        gameEND();
+    }
     }
   }
 })
+function gameEND() {
+  if (score == 1) {
+    message.innerHTML = "You solved the combo in  " + score +" guess";
+  } else {
+    message.innerHTML = "You solved the combo in  " + score +" guesses";
+  }
+  gamePlay = false;
+  button.innerHTML = "Restart Game";
+}
 
 // creating elements
 function maker() {
@@ -37,7 +59,7 @@ function maker() {
     el.classList.add('numb')
     
     el.correct = Math.floor(Math.random() *10)
-    el.value = el.correct
+    el.value = 0
     el.order = x
     gameArea.appendChild(el)
     console.log(el)
